@@ -1,6 +1,6 @@
 # openssl-san-certificate-generator
 
-Generate a self-signed PEM format wildcard certificate for domain, with correct Subject Alternative Name fields, and output it to `/build/export/server.pem`. ¯\_(ツ)_/¯`
+Generate a self-signed PEM format wildcard certificate for domain, with correct Subject Alternative Name fields, and output it to `/build/export/server.pem`. ¯\\\_(ツ)\_/¯
 
 ```
 mkdir ./export
