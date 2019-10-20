@@ -68,5 +68,6 @@ openssl x509 -text -noout -in server.pem
 #
 # Copy the final certificate to export
 #
-cp -rf server.pem ./export/server.pem
+mkdir -p /export
+cp -rf server.pem /export/server.pem
 

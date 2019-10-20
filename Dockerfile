@@ -9,7 +9,7 @@ WORKDIR /build
 
 ADD . .
 
-RUN mkdir -p ./export
+RUN mkdir -p /export
 
 ENTRYPOINT ./build.sh
 
