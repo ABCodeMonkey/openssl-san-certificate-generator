@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+if [ -z "$DOMAINS" ]; then
+  DOMAINS=$DOMAIN
+fi
+
+for DOMAIN in $DOMAINS; do
+  PRIMARY_DOMAIN=$DOMAIN
+  break
+done
+
 #
 # Create server.conf file
 #
@@ -16,8 +25,8 @@ ST=local
 L=local
 O=local
 OU=local_RootCA
-emailAddress=contact@$DOMAIN
-CN = $DOMAIN
+emailAddress=contact@$PRIMARY_DOMAIN
+CN = $PRIMARY_DOMAIN
 
 EOF
 
@@ -32,10 +41,21 @@ keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
 subjectAltName = @alt_names
 
 [alt_names]
-DNS.1 = $DOMAIN
-DNS.2 = *.$DOMAIN
-
 EOF
+
+INDEX=0
+for DOMAIN in $DOMAINS; do
+INDEX=$((INDEX+1))
+cat << EOF >> v3.ext
+DNS.$INDEX = $DOMAIN
+EOF
+
+INDEX=$((INDEX+1))
+cat << EOF >> v3.ext
+DNS.$INDEX = *.$DOMAIN
+EOF
+
+done
 
 
 #
